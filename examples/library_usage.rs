@@ -1,5 +1,5 @@
-// Example of using the nr library from another Rust program
-use nr::{Notify, Type};
+// Example of using the tnr library from another Rust program
+use tnr::{Notify, Type};
 
 fn main() {
     // Basic notification

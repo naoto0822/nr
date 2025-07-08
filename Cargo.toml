@@ -1,5 +1,5 @@
 [package]
-name = "nr"
+name = "tnr"
 version = "0.1.0"
 edition = "2021"
 authors = ["naoto0822"]
@@ -7,17 +7,17 @@ description = "A macOS notification library and CLI tool using terminal-notifier
 license = "MIT"
 repository = "https://github.com/naoto0822/nr"
 homepage = "https://github.com/naoto0822/nr"
-documentation = "https://docs.rs/nr"
+documentation = "https://docs.rs/tnr"
 readme = "README.md"
 keywords = ["notification", "macos", "terminal-notifier", "cli"]
 categories = ["command-line-utilities", "os::macos-apis"]
 
 [lib]
-name = "nr"
+name = "tnr"
 path = "src/lib.rs"
 
 [[bin]]
-name = "nr"
+name = "tnr"
 path = "src/main.rs"
 
 [dependencies]

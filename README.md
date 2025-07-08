@@ -1,4 +1,4 @@
-# nr
+# tnr
 
 A macOS notification library and CLI tool that provides a simple interface to send notifications using terminal-notifier.
 
@@ -32,7 +32,7 @@ To use terminal-notifier, you need to configure macOS notification settings:
 ### As a CLI tool
 
 ```bash
-cargo install nr
+cargo install tnr
 ```
 
 ### As a library dependency
@@ -41,23 +41,23 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-nr = "0.1.0"
+tnr = "0.1.0"
 ```
 
 ## CLI Usage
 
 ```bash
 # Basic notification
-nr --message "Hello, World!"
+tnr --message "Hello, World!"
 
 # Notification with title and type
-nr --title "Build Status" --message "Build completed successfully" --type success
+tnr --title "Build Status" --message "Build completed successfully" --type success
 
 # Notification with clickable URL
-nr --message "Check the results" --url "https://github.com"
+tnr --message "Check the results" --url "https://github.com"
 
 # Error notification
-nr --message "Something went wrong" --type error
+tnr --message "Something went wrong" --type error
 ```
 
 ### CLI Options
@@ -70,7 +70,7 @@ nr --message "Something went wrong" --type error
 ## Library Usage
 
 ```rust
-use nr::{Notify, Type};
+use tnr::{Notify, Type};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Basic notification
@@ -112,7 +112,7 @@ The main struct for creating and sending notifications.
 - `with_title(self, title: impl Into<String>) -> Self` - Set the notification title
 - `with_type(self, notification_type: Type) -> Self` - Set the notification type
 - `with_url(self, url: impl Into<String>) -> Self` - Set a URL to open when clicked
-- `send(&self) -> Result<(), NrError>` - Send the notification
+- `send(&self) -> Result<(), TnrError>` - Send the notification
 
 ### `Type`
 
@@ -120,10 +120,10 @@ Enum representing different types of notifications with associated emojis and so
 
 ### Error Handling
 
-The library uses `NrError` enum for error handling:
+The library uses `TnrError` enum for error handling:
 
-- `NrError::ExecutionFailed` - terminal-notifier execution failed
-- `NrError::CommandNotFound` - terminal-notifier not found on system
+- `TnrError::ExecutionFailed` - terminal-notifier execution failed
+- `TnrError::CommandNotFound` - terminal-notifier not found on system
 
 ## Examples
 

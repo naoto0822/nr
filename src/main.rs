@@ -1,5 +1,5 @@
 use clap::Parser;
-use nr::{Notify, Type};
+use tnr::{Notify, Type};
 
 #[derive(Parser)]
 #[command(name = "ccn")]

@@ -80,29 +80,29 @@ impl Notify {
         self
     }
     
-    pub fn send(&self) -> Result<(), NrError> {
+    pub fn send(&self) -> Result<(), TnrError> {
         send_notification(self)
     }
 }
 
 #[derive(Debug)]
-pub enum NrError {
+pub enum TnrError {
     ExecutionFailed(String),
     CommandNotFound(String),
 }
 
-impl std::fmt::Display for NrError {
+impl std::fmt::Display for TnrError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            NrError::ExecutionFailed(msg) => write!(f, "Failed to send notification: {}", msg),
-            NrError::CommandNotFound(msg) => write!(f, "Command not found: {}", msg),
+            TnrError::ExecutionFailed(msg) => write!(f, "Failed to send notification: {}", msg),
+            TnrError::CommandNotFound(msg) => write!(f, "Command not found: {}", msg),
         }
     }
 }
 
-impl std::error::Error for NrError {}
+impl std::error::Error for TnrError {}
 
-pub fn send_notification(notification: &Notify) -> Result<(), NrError> {
+pub fn send_notification(notification: &Notify) -> Result<(), TnrError> {
     let title = if notification.title.is_empty() {
         match &notification.notification_type {
             Some(nt) => format!("{} {}", nt.get_emoji(), nt.get_default_title()),
@@ -132,11 +132,11 @@ pub fn send_notification(notification: &Notify) -> Result<(), NrError> {
     }
     
     let output = cmd.output()
-        .map_err(|e| NrError::CommandNotFound(format!("terminal-notifier: {}. Please install with: brew install terminal-notifier", e)))?;
+        .map_err(|e| TnrError::CommandNotFound(format!("terminal-notifier: {}. Please install with: brew install terminal-notifier", e)))?;
     
     if output.status.success() {
         Ok(())
     } else {
-        Err(NrError::ExecutionFailed(String::from_utf8_lossy(&output.stderr).to_string()))
+        Err(TnrError::ExecutionFailed(String::from_utf8_lossy(&output.stderr).to_string()))
     }
 }
