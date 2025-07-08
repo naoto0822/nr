@@ -1,5 +1,5 @@
 use clap::Parser;
-use nr::{Notification, NotificationType};
+use nr::{Notify, Type};
 
 #[derive(Parser)]
 #[command(name = "ccn")]
@@ -21,14 +21,14 @@ struct Args {
 fn main() {
     let args = Args::parse();
     
-    let mut notification = Notification::new(&args.message);
+    let mut notification = Notify::new(&args.message);
     
     if let Some(title) = args.title {
         notification = notification.with_title(title);
     }
     
     if let Some(type_str) = args.r#type {
-        if let Some(notification_type) = NotificationType::from_str(&type_str) {
+        if let Some(notification_type) = Type::from_str(&type_str) {
             notification = notification.with_type(notification_type);
         }
     }
