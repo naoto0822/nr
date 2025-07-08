@@ -2,8 +2,8 @@ use clap::Parser;
 use tnr::{Notify, Type};
 
 #[derive(Parser)]
-#[command(name = "ccn")]
-#[command(about = "Claude Code Notifier - macOS notification tool")]
+#[command(name = "tnr")]
+#[command(about = "Terminal Notifier Rust - macOS notification tool")]
 struct Args {
     #[arg(long, help = "Notification title")]
     title: Option<String>,
