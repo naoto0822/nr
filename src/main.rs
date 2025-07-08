@@ -13,6 +13,9 @@ struct Args {
     
     #[arg(long, help = "Notification type (error, warning, info, success)", value_name = "TYPE")]
     r#type: Option<String>,
+    
+    #[arg(long, help = "URL to open when notification is clicked")]
+    url: Option<String>,
 }
 
 #[derive(Debug)]
@@ -82,10 +85,10 @@ fn main() {
         None => args.message,
     };
     
-    send_notification(&title, &message, &notification_type);
+    send_notification(&title, &message, &notification_type, &args.url);
 }
 
-fn send_notification(title: &str, message: &str, notification_type: &Option<NotificationType>) {
+fn send_notification(title: &str, message: &str, notification_type: &Option<NotificationType>, url: &Option<String>) {
     let mut cmd = Command::new("terminal-notifier");
     cmd.arg("-title")
         .arg(title)
@@ -94,6 +97,10 @@ fn send_notification(title: &str, message: &str, notification_type: &Option<Noti
     
     if let Some(nt) = notification_type {
         cmd.arg("-sound").arg(nt.get_sound());
+    }
+    
+    if let Some(u) = url {
+        cmd.arg("-open").arg(u);
     }
     
     let output = cmd.output();
